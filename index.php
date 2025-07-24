@@ -6,7 +6,7 @@
  * @license  GPL-3.0+
  *
  * @wordpress-plugin
- * Plugin Name: Gothic Landscape Selections V2
+ * Plugin Name: Gothic Landscape Selections V2 Test
  * Plugin URI: http://gothiclandscape.com/
  * Description: A plugin to power Gothic Landscape of Arizona Landscape Selections Application
  * Author: Jeremy Scott
