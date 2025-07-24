@@ -291,6 +291,8 @@ $homebuilder = $user ? get_user_meta( $user->ID, 'gothic_user_homebuilder', true
 
 	<footer style="text-align: center">
 		<a class="button button-secondary" href="<?php echo esc_url( get_permalink( get_page_by_path( 'landscape/selections/index' ) ) ); ?>"><?php esc_html_e( 'Cancel', 'gothic-selections' ); ?></a>
+		<div class="g-recaptcha" data-sitekey="6LdUAI4rAAAAAOFYhY9G-942f28GsuvTXw-6b9N8"></div>
+
 		<button type="submit"><?php esc_html_e( 'Submit', 'gothic-selections' ); ?></button>
 	</footer>
 </div>

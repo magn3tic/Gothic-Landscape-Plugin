@@ -2,8 +2,7 @@
   $(document).ready(function () {
     var form = $(".landscape-selection-form");
 
-    // Validator
-    // ---------
+  
     jQuery.validator.addMethod(
       "notEqual",
       function (value, element, param) {
@@ -12,11 +11,28 @@
       "Please choose a value!"
     );
 
-    $(form).validate();
+    $.validator.addMethod("recaptchaValid", function (value, element, param) {
+      return grecaptcha.getResponse() !== "";
+    }, "Please verify that you are not a robot.");
+
+    $(form).validate({
+      ignore: [],
+      rules: {
+        'g-recaptcha-response': {
+          recaptchaValid: true
+        }
+      }
+    });
+
+    $(form).on("submit", function (e) {
+      if (grecaptcha.getResponse() === "") {
+        alert("Please verify that you are not a robot.");
+        e.preventDefault();
+        return false;
+      }
+    });
 
     // Toggle Access Forms
-    // -------------------
-    
     $(".select-login").on("submit", function (event) {
       event.preventDefault();
     });
@@ -28,8 +44,6 @@
     });
 
     // Select 2
-    // --------
-
     var dynamic_select = $(form).find(".dynamic-select select");
     var dynamic_select_w_img = $(form).find(".dynamic-select.w-img select");
     var selectBuilder = $(form).find('select[name="builder_id"]');
@@ -37,8 +51,6 @@
     var selectModel = $(form).find('select[name="model_id"]');
     var selectPackage = $(form).find('select[name="package_id"]');
     var selectBackyard = $(form).find('select[name="backyard_id"]');
-
-    var select = $(form).find("select2img");
 
     dynamic_select.select2({ width: "100%" });
 
@@ -143,9 +155,7 @@
       var image = $(this).find(":selected").data("image"),
         title = $(this).find(":selected").text(),
         container = $(this).closest(".field-container");
-      container.children("img").each(function () {
-        $(this).remove();
-      });
+      container.children("img").remove();
       container.append(
         '<img src="' +
           image +
@@ -157,8 +167,6 @@
       );
     });
 
-    // Show/Hide Package Upgrade Warning
-    //----------------------------------
     $('input[name="package_id"],input[name="backyard_id"]').on(
       "change",
       function () {
@@ -171,8 +179,6 @@
       $(this).val("true");
     });
 
-    // Lightbox
-    //-------------------------------
     $('a[href="#notify-problem"]').fancybox({
       maxWidth: 800,
       maxHeight: 600,
@@ -206,7 +212,7 @@
     });
   });
 
-  $(window).load(function () {
+  $(window).on("load", function () {
     if ($(".posts-data-table").length) {
       $(".posts-data-table .special-indicator").each(function (index, item) {
         $(item).closest("tr").addClass("important");
@@ -225,18 +231,16 @@
 
       $(".posts-data-table thead th").each(function (i) {
         if ($(this).text() !== "") {
-          var isStatusColumn = $(this).text() == "Status" ? true : false;
+          var isStatusColumn = $(this).text() == "Status";
 
-          // All other non-Status columns (like the example)
           if (isStatusColumn) {
             var select = $('<select><option value="">All</option></select>')
               .insertBefore($(this).closest("table"))
               .on("change", function () {
                 var val = $(this).val();
-
                 table
                   .column(i)
-                  .search(val ? "^" + $(this).val() + "$" : val, true, false)
+                  .search(val ? "^" + val + "$" : val, true, false)
                   .draw();
               });
             select.wrap(
@@ -251,7 +255,7 @@
               .data()
               .unique()
               .sort()
-              .each(function (d, j) {
+              .each(function (d) {
                 select.append('<option value="' + d + '">' + d + "</option>");
               });
           }
