@@ -1,0 +1,52 @@
+.gothic-meta-palettes {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 900px;
+}
+.gothic-meta-palettes .gothic-meta-field-type-post-picker {
+  flex: 0 1 30.33%;
+  margin-right: 3%;
+}
+.gothic-meta-palettes .gothic-field-label label {
+  margin-top: 32px;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+.gothic-meta-palettes .selectize-input {
+  min-height: 120px;
+}
+.gothic-meta-field-group .field-label,
+.gothic-field-label {
+  font-size: 14px;
+}
+.gothic-field-description {
+  margin-top: 12px;
+}
+
+#models-backyards .inside,
+#models-plans .inside {
+  display: flex;
+  flex-flow: row wrap;
+}
+.gothic-meta-field-template-plan-image {
+  flex: 0 1 100%;
+}
+@media only screen and (min-width: 767px) {
+  .gothic-meta-field-template-plan-image {
+    flex: 0 1 50%;
+  }
+}
+.gothic-field .plan-image {
+  width: 300px;
+  height: 300px;
+  background: #cccccc;
+  background-size: contain;
+  margin: 20px 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.gothic-field .plan-image.no-image {
+  width: auto;
+  height: auto;
+}
