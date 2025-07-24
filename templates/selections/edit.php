@@ -341,11 +341,12 @@ if ( !empty($issues) || $status == 'seller_action' ) {
 		<?php if($resolveEnabled): ?>
 		
 			<div class="c-mt-4 c-ml-4">
+				<div class="g-recaptcha" data-sitekey="6LdUAI4rAAAAAOFYhY9G-942f28GsuvTXw-6b9N8"></div>
 				<button type="submit" name="resolve" value="<?= get_the_ID(); ?>" class="js-resolve-button crunch-button crunch-button__full-background crunch-button__full-background--primary-color crunch-button__full-background--medium">Resolve</button>
 			</div>
 
 		<?php endif; ?>
-
+			<div class="g-recaptcha" data-sitekey="6LdUAI4rAAAAAOFYhY9G-942f28GsuvTXw-6b9N8"></div>
 		<button class="c-ml-4" type="submit"><?php esc_html_e( 'Save Changes', 'gothic-selections' ); ?></button>
 	</footer>
 </div>
